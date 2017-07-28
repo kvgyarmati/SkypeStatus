@@ -31,10 +31,10 @@ return
 statusOptionPick:
 Gui, 5:Destroy
 Gui,+AlwaysOnTop -sysmenu
-Gui, 5:Add, Text, y10, Please enter which option in lowercase `n (L - Lunch, B - Break, C - CMA, `n M - Meeting, N - Normal, T - Training, `n AFK - Away From Keyboard, BRB - Be Right Back, DND - Do Not Disturb, `n A - Available [sub-Status only], O - Off Work [ss only] ):
-Gui, 5:Add, Edit, x80 y25 w120 h20 vstrid5
-Gui, 5:Add, Button, x80 y50 default gsubmit5, &SUBMIT
-Gui, 5:Add, Button, x+10 y50 gcancel5, &CANCEL
+Gui, 5:Add, Text, y10, Please enter which option in lowercase `n (L - Lunch, B - Break, C - CMA, `n M - Meeting, N - Normal, T - Training, `n AFK - Away From Keyboard, BRB - Be Right Back, DND - Do Not Disturb, `n A - Available [sub-Status only], O - Off Work [ss only], H - Busy [ss only] ):
+Gui, 5:Add, Edit, x180 y125 w120 h20 vstrid5
+Gui, 5:Add, Button, x180 y150 default gsubmit5, &SUBMIT
+Gui, 5:Add, Button, x110 y150 gcancel5, &CANCEL
 Gui, 5:Show, , Connect to TUNA/Larry
 return
 
@@ -43,11 +43,7 @@ gui, 5:submit
 If (strid5 = "l")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -61,16 +57,13 @@ If (strid5 = "l")
   Send {tab}
   Send {space}
   Send e
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "b")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -84,16 +77,13 @@ else If (strid5 = "b")
   Send {tab}
   Send {space}
   Send e
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "c")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -107,16 +97,13 @@ else If (strid5 = "c")
   Send {tab}
   Send {space}
   Send b
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "m")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -130,16 +117,13 @@ else If (strid5 = "m")
   Send {tab}
   Send {space}
   Send b
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "n")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -153,15 +137,12 @@ else If (strid5 = "n")
   Send {tab}
   Send {space}
   Send v
+  WinMinimize, Skype for Business
   return
 }else If (strid5 = "t")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -175,16 +156,13 @@ else If (strid5 = "n")
   Send {tab}
   Send {space}
   Send b
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "afk")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -198,16 +176,13 @@ else If (strid5 = "afk")
   Send {tab}
   Send {space}
   Send e
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "brb")
 {
   WinActivate, Skype for Business
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
+  send {tab} ; 9 tabs to status bar
   send {tab}
   send {tab}
   send {tab}
@@ -221,6 +196,7 @@ else If (strid5 = "brb")
   Send {tab}
   Send {space}
   Send e ; sub-Status BRB
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "a")
@@ -235,13 +211,9 @@ else If (strid5 = "a")
   send {tab}
   send {tab}
   send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  Send {tab}
   Send {space}
   Send v ; sub-Status Available
+  WinMinimize, Skype for Business
   return
 }
 else If (strid5 = "o")
@@ -256,13 +228,27 @@ else If (strid5 = "o")
   send {tab}
   send {tab}
   send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  send {tab}
-  Send {tab}
   Send {space}
   Send w ; sub-Status off work
+  WinMinimize, Skype for Business
+  return
+}
+else If (strid5 = "h")
+{
+  WinActivate, Skype for Business
+  send {tab} ; 10 tabs for ss
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  Send {space}
+  Send b ; sub-Status Busy
+  WinMinimize, Skype for Business
   return
 }
 else
