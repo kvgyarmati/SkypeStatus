@@ -31,7 +31,7 @@ return
 statusOptionPick:
 Gui, 5:Destroy
 Gui,+AlwaysOnTop -sysmenu
-Gui, 5:Add, Text, y10, Please enter which option in lowercase `n (L - Lunch, B - Break, C - CMA, `n M - Meeting, N - Normal, T - Training, `n AFK - Away From Keyboard, BRB - Be Right Back, DND - Do Not Disturb, `n A - Available [sub-Status only], O - Off Work [ss only], H - Busy [ss only] ):
+Gui, 5:Add, Text, y10, Please enter which option in lowercase `n (L - Lunch, B - Break, C - CMA, `n M - Meeting, N - Normal, T - Training, `n D - Documentation, AFK - Away From Keyboard, `n BRB - Be Right Back, DND - Do Not Disturb, `n A - Available [sub-Status only], O - Off Work [ss only], H - Busy [ss only] ):
 Gui, 5:Add, Edit, x180 y125 w120 h20 vstrid5
 Gui, 5:Add, Button, x180 y150 default gsubmit5, &SUBMIT
 Gui, 5:Add, Button, x110 y150 gcancel5, &CANCEL
@@ -153,6 +153,26 @@ else If (strid5 = "n")
   send {tab}
   Send {Home}{Shift Down}{End}{Shift Up}{Backspace 2} ; clears line
   Send %currentDateShort% %scheduledTime% Training today
+  Send {tab}
+  Send {space}
+  Send b
+  WinMinimize, Skype for Business
+  return
+}
+else If (strid5 = "d")
+{
+  WinActivate, Skype for Business
+  send {tab} ; 9 tabs to status bar
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  send {tab}
+  Send {Home}{Shift Down}{End}{Shift Up}{Backspace 2} ; clears line
+  Send %currentDateShort% %scheduledTime% Working on Documentation
   Send {tab}
   Send {space}
   Send b
