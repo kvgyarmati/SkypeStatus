@@ -11,8 +11,118 @@
 
 
 global currentDateShort
-global scheduledTime = "~ 0830 - 1700 EDT: " ; will setup a change function for this later
+global scheduledTime = "~ 0830 - 1700 EST: " ; will setup a change function for this later
+global currentTimeZone = "EDT"
+global TimeZoneLow = "MST"
 
+
+
+
+; ##########################################################
+; #                                                        #
+; #  Editing ToDos   -       2/20/18                       #
+; #                                                        #
+; #   1) Allowing for time saving                          #
+; #      a) %scheduledTime%                                #
+; #      b) Pushing calc timeZone into time.ini file       #
+; #                                                        #
+; #                                                        #
+; #                                                        #
+; #                                                        #
+; #                                                        #
+; #                                                        #
+; ##########################################################
+
+;Goto, TestTimeZone
+
+;TestTimeZone: ; # Sets up pull from Host for the Full length time zone name
+;RegREad, TimeZone, HKEY_LOCAL_MACHINE, SYSTEM\ControlSet001\Control\TimeZoneInformation, TimeZoneKeyName
+; MsgBox, %TimeZone%
+
+;if (TimeZone = "Eastern Standard Time")
+;  {
+;    TimeZoneLow = EST
+;  }
+;else if (TimeZone = "Eastern Daylight Time")
+;  {
+;    TimeZoneLow = EDT
+;  }
+;Goto, Main
+
+; ##############################################################################
+
+;TimeSet:
+
+;If ()
+
+;InputBox, scheduledTime, Scheduled Time of Work, Please enter your scheduled time of work - this will be saved to a settings file.
+
+; ##############################################################################
+; #   time ini push saved
+; ##############################################################################
+
+;dfltsk:
+;Run data\dfltskills.exe
+;Return
+
+
+
+
+; ##############################################################################
+; #   time ini read saved
+; ##############################################################################
+
+;pos:
+;Process Exist, pos.exe
+;PID := ErrorLevel
+;If %PID% = 0
+;{
+;Run data/pos.exe
+;Menu, skillz, ToggleCheck, POS
+;}
+;else
+;{
+;Process Close, pos.exe
+;Menu, skillz, uncheck, POS
+;}
+;Return
+
+;sco:
+;Process Exist, sco.exe
+;PID := ErrorLevel
+;If %PID% = 0
+;{
+;Run data/sco.exe
+;Menu, skillz, ToggleCheck, SCO
+;}
+;else
+;{
+;Process Close, sco.exe
+;Menu, skillz, uncheck, SCO
+;}
+;Return
+
+;clst:
+;Process Exist, clst.exe
+;PID := ErrorLevel
+;If %PID% = 0
+;{
+;Run data/clst.exe
+;Menu, skillz, ToggleCheck, ClickList
+;}
+;else
+;{
+;Process Close, clst.exe
+;Menu, skillz, uncheck, ClickList
+;}
+;Return
+
+
+
+
+; ##############################################################################
+
+; Main:
 FormatTime, currentDateShort, MMDD, MM/dd
 Goto, statusUpdate
 
@@ -118,6 +228,7 @@ else If (strid5 = "n")
   send {tab}
   Send {Home}{Shift Down}{End}{Shift Up}{Backspace 2} ; clears line
   Send %currentDateShort% %scheduledTime%
+;  Send %TimeZoneLow% ~ This was testing for the above timezone setter.
   Send {tab} ; 1 tab to status mode MS -16, 2 tab for MSO16
   Send {tab}
   Send {space}
