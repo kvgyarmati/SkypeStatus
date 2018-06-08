@@ -11,7 +11,7 @@
 
 
 global currentDateShort
-global scheduledTime = "~ 0830 - 1700 EST: " ; will setup a change function for this later
+global scheduledTime = "~ 0830 - 1700 EDT: " ; will setup a change function for this later
 global currentTimeZone = "EDT"
 global TimeZoneLow = "MST"
 
